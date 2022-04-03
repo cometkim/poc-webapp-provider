@@ -9,9 +9,6 @@ export const {
 } = createCloudflareKVSessionStorage({
   cookie: {
     name: 'SESSION_ID',
-    secrets: [
-      process.env.SESSION_SECRET || 'SECRET',
-    ],
     httpOnly: true,
     secure: true,
     sameSite: 'strict',
