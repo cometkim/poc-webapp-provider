@@ -9,14 +9,22 @@ export default function Login() {
   return (
     <div>
       <Form method="post">
-        <input type="submit" name="via" value="github" />
-        <input type="submit" name="via" value="google" />
+        <button type="submit" name="via" value="github">
+          Sign-in with GitHub
+        </button>
+        <button type="submit" name="via" value="google">
+          Sign-in with Google
+        </button>
       </Form>
     </div>
   );
 }
 
-export const action: ActionFunction = async ({ request, params }) => {
+export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
-  const a = form.get('via');
+  const via = form.get('via');
+  switch (via) {
+    case 'github':
+      return authenticator.authenticate('github', request);
+  }
 };

@@ -1,6 +1,6 @@
 import { createCloudflareKVSessionStorage } from '@remix-run/cloudflare';
 
-declare var SessionStorage: KVNamespace;
+declare var SESSION: KVNamespace;
 
 export const {
   getSession,
@@ -8,7 +8,13 @@ export const {
   destroySession,
 } = createCloudflareKVSessionStorage({
   cookie: {
-    name: '__session',
+    name: 'SESSION_ID',
+    secrets: [
+      process.env.SESSION_SECRET || 'SECRET',
+    ],
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
   },
-  kv: SessionStorage,
+  kv: SESSION,
 });
