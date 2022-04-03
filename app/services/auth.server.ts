@@ -19,8 +19,10 @@ authenticator.use(
     callbackURL: GITHUB_APP_CALLBACK_URL,
   }, async ({ accessToken, profile }) => {
     const user = await signIn({
-      email: profile.emails[0].value,
+      username: profile.id,
       name: profile.displayName,
+      email: profile.emails[0].value,
+      pictureUrl: profile.photos[0].value,
       provider: {
         type: 'github',
         data: {

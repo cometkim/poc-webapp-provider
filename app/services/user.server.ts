@@ -7,8 +7,10 @@ const makeStorageKey = (key: string) => `user:${key}`;
 
 interface SignIn {
   (params: {
-    email: string,
+    username: string,
     name: string,
+    email: string,
+    pictureUrl: string,
     provider: AuthProvider,
   }): Promise<User>;
 }
@@ -21,8 +23,10 @@ export const signIn: SignIn = async params => {
   if (!user) {
     user = {
       id: crypto.randomUUID(),
+      username: params.username,
       name: params.name,
       email: params.email,
+      pictureUrl: params.pictureUrl,
     };
     await storage.put(userKey, JSON.stringify(user));
   }
