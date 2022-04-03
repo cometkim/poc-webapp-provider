@@ -26,9 +26,11 @@ watch_dir = "app"
 format = "service-worker"
 
 [vars]
-GITHUB_APP_CALLBACK_URL="https://poc-webapp-provider.cometkim.workers.dev/auth/github/callback"
+GITHUB_APP_CALLBACK_URL="https://webapp-provider.hyeseong.kim/auth/github/callback"
 
 # [secrets]
 # GITHUB_APP_CLIENT_ID
 # GITHUB_APP_CLIENT_SECRET
 # GITHUB_APP_CALLBACK_URL
+# CLOUDFLARE_ZONE_ID
+# CLOUDFLARE_ZONE_MANAGEMENT_KEY

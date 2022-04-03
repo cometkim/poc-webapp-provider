@@ -22,9 +22,27 @@ const handleEvent = async (event: FetchEvent) => {
 };
 
 addEventListener('fetch', async event => {
-  try {
-    event.respondWith(handleEvent(event));
-  } catch (e: any) {
-    event.respondWith(new Response('Internal Error', { status: 500 }));
+  const url = new URL(event.request.url);
+  if (url.origin === 'https://webapp-provider.hyeseong.kim') {
+    try {
+      return event.respondWith(handleEvent(event));
+    } catch (e: any) {
+      return event.respondWith(new Response('Internal Error', { status: 500 }));
+    }
+  }
+
+  const match = url.host.match(/(?<appname>[\w\-]+)\.(?<username>[\w\-]+)\.webapp\.hyeseong\.kim/)
+  if (match.groups) {
+    const { appname, username } = match.groups;
+    return event.respondWith(
+      new Response(JSON.stringify({ appname, username }), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    );
+  } else {
+    return event.respondWith(new Response('Not found', { status: 404 }));
   }
 });
