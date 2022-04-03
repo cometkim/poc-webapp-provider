@@ -7,5 +7,6 @@ module.exports = {
   ignoredRouteFiles: [".*"],
   publicPath: '/build/',
   serverBuildDirectory: 'build',
+  serverBuildTarget: 'cloudflare-workers',
   assetsBuildDirectory: 'public/build',
 };

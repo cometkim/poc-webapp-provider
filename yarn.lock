@@ -483,6 +483,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cometjs/core@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@cometjs/core@npm:2.0.2"
+  peerDependencies:
+    typescript: ^4.5.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 6d4fa87c26f29365283e5eb4a918610631b851363a3ea53f5c14ab3e81cb9d293c160866418816cd1aa7d3086b7ace627662e7081d9d0c97a55e10cc3e75b40a
+  languageName: node
+  linkType: hard
+
+"@cometjs/react-utils@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@cometjs/react-utils@npm:2.0.2"
+  dependencies:
+    "@cometjs/core": ^2.0.2
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: b628998a6fd3a7ad15b2fb962b967f08f30988e11ef56acf3f29680b6911cbec6778addab86d2493444d56530a65274ed18c994db1175e06fe45e7f283cfb298
+  languageName: node
+  linkType: hard
+
 "@esbuild-plugins/node-modules-polyfill@npm:^0.1.4":
   version: 0.1.4
   resolution: "@esbuild-plugins/node-modules-polyfill@npm:0.1.4"
@@ -1346,6 +1369,13 @@ __metadata:
     "@typescript-eslint/types": 5.17.0
     eslint-visitor-keys: ^3.0.0
   checksum: 333468277b50e2fc381ba1b99ccb410046c422e0329c791c51bea62e705edd16ba97f75b668c6945a3ea3dc43b89a1739693ea60bfa241c67ce42e8b474e5048
+  languageName: node
+  linkType: hard
+
+"@zip.js/zip.js@npm:^2.4.9":
+  version: 2.4.9
+  resolution: "@zip.js/zip.js@npm:2.4.9"
+  checksum: 60f630b7a4bf1821b0f151e379a65b9cff72b66eb26ca0bd9cfa773ac95b0318f1094c166ae037ee0e7dca463a635cddda4825bd0e3ff386eb76e8319493b4d4
   languageName: node
   linkType: hard
 
@@ -6346,6 +6376,8 @@ __metadata:
   dependencies:
     "@cloudflare/workers-types": ^3.4.0
     "@cloudflare/wrangler": ^1.19.11
+    "@cometjs/core": ^2.0.2
+    "@cometjs/react-utils": ^2.0.2
     "@remix-run/cloudflare": ^1.3.4
     "@remix-run/cloudflare-workers": ^1.3.4
     "@remix-run/dev": ^1.3.4
@@ -6353,6 +6385,7 @@ __metadata:
     "@remix-run/react": ^1.3.4
     "@types/react": ^17.0.43
     "@types/react-dom": ^17.0.14
+    "@zip.js/zip.js": ^2.4.9
     esbuild: ^0.14.30
     eslint: ^8.11.0
     miniflare: ^2.4.0
@@ -6362,6 +6395,7 @@ __metadata:
     remix-auth: ^3.2.1
     remix-auth-github: ^1.0.0
     remix-auth-oauth2: ^1.2.0
+    runtypes: ^6.5.1
     typescript: ^4.6.3
   languageName: unknown
   linkType: soft
@@ -6985,6 +7019,13 @@ __metadata:
   dependencies:
     queue-microtask: ^1.2.2
   checksum: cb4f97ad25a75ebc11a8ef4e33bb962f8af8516bb2001082ceabd8902e15b98f4b84b4f8a9b222e5d57fc3bd1379c483886ed4619367a7680dad65316993021d
+  languageName: node
+  linkType: hard
+
+"runtypes@npm:^6.5.1":
+  version: 6.5.1
+  resolution: "runtypes@npm:6.5.1"
+  checksum: 1ac1c4ad74c739356255323e4748c96f4e7b44cee44e917c66089668c93228222b2b8ef8571b8fcee9280c514ecf2b4eba94d39182fc0458d8eaa0be794ef758
   languageName: node
   linkType: hard
 

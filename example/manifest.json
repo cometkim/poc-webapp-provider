@@ -1,0 +1,6 @@
+{
+  "name": "example",
+  "version": 1,
+  "icon": "icon.svg",
+  "entry": "index.html"
+}

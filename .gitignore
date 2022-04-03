@@ -4,10 +4,10 @@
 
 .DS_Store
 *.log
+*.zip
 node_modules/
 
 /.cache
-/functions/\[\[path\]\].js
 /public/build
 .env
 
