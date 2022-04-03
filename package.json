@@ -2,16 +2,16 @@
   "name": "poc-webapp-provider",
   "version": "0.0.0",
   "private": true,
+  "main": "./worker.mjs",
   "scripts": {
-    "build": "remix build",
+    "build": "remix build && node build.mjs",
     "dev": "run-p \"dev:*\"",
     "dev:remix": "remix watch",
-    "dev:wrangler": "wrangler pages dev ./public --kv SESSION --kv DATA",
-    "start": "NODE_ENV=production yarn dev:wrangler"
+    "dev:miniflare": "NODE_ENV=development miniflare --kv SESSION --kv DATA --kv-persist --build-command=\"node build.mjs\" --watch"
   },
   "dependencies": {
     "@remix-run/cloudflare": "^1.3.4",
-    "@remix-run/cloudflare-pages": "^1.3.4",
+    "@remix-run/cloudflare-workers": "^1.3.4",
     "@remix-run/react": "^1.3.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -21,14 +21,16 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^3.4.0",
+    "@cloudflare/wrangler": "^1.19.11",
     "@remix-run/dev": "^1.3.4",
     "@remix-run/eslint-config": "^1.3.4",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
+    "esbuild": "^0.14.30",
     "eslint": "^8.11.0",
+    "miniflare": "^2.4.0",
     "npm-run-all": "^4.1.5",
-    "typescript": "^4.6.3",
-    "wrangler": "beta"
+    "typescript": "^4.6.3"
   },
   "engines": {
     "node": ">=14"

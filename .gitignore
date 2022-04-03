@@ -1,3 +1,7 @@
+/worker.mjs
+/build/
+/.mf/
+
 .DS_Store
 *.log
 node_modules/
