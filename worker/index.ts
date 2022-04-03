@@ -1,6 +1,8 @@
 import { handleRemix } from './remix';
 import { handleWebapp } from './webapp';
 
+declare var FALLBACK_ORIGIN: string;
+
 declare global {
   const SESSION: KVNamespace;
   const DATA: KVNamespace;
@@ -9,7 +11,7 @@ declare global {
 
 addEventListener('fetch', async event => {
   const url = new URL(event.request.url);
-  if (url.origin === 'https://webapp-provider.hyeseong.kim') {
+  if (url.origin === FALLBACK_ORIGIN) {
     try {
       return event.respondWith(
         handleRemix(event),

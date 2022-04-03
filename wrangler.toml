@@ -4,6 +4,17 @@ compatibility_date = "2022-04-03"
 workers_dev = true
 account_id = "fe86c3d78b514b31fdd1a74181c2c4ce"
 
+[vars]
+FALLBACK_ORIGIN="https://webapp-provider.hyeseong.kim"
+GITHUB_APP_CALLBACK_URL="https://webapp-provider.hyeseong.kim/auth/github/callback"
+
+# [secrets]
+# GITHUB_APP_CLIENT_ID
+# GITHUB_APP_CLIENT_SECRET
+# GITHUB_APP_CALLBACK_URL
+# CLOUDFLARE_ZONE_ID
+# CLOUDFLARE_ZONE_MANAGEMENT_KEY
+
 [[kv_namespaces]]
 binding = "SESSION"
 id = "0ac9c4762601432ab5ed2cfc17169a31"
@@ -19,7 +30,6 @@ binding = "APPS"
 id = "0441321106a340d1977c90571d660957"
 preview_id = "0441321106a340d1977c90571d660957"
 
-
 [site]
 bucket = "./public"
 entry-point = "."
@@ -30,13 +40,3 @@ watch_dir = "app"
 
 [build.upload]
 format = "service-worker"
-
-[vars]
-GITHUB_APP_CALLBACK_URL="https://webapp-provider.hyeseong.kim/auth/github/callback"
-
-# [secrets]
-# GITHUB_APP_CLIENT_ID
-# GITHUB_APP_CLIENT_SECRET
-# GITHUB_APP_CALLBACK_URL
-# CLOUDFLARE_ZONE_ID
-# CLOUDFLARE_ZONE_MANAGEMENT_KEY
