@@ -2232,7 +2232,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4":
+"debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.3, debug@npm:^4.3.4":
   version: 4.3.4
   resolution: "debug@npm:4.3.4"
   dependencies:
@@ -4242,6 +4242,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"intl-parse-accept-language@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "intl-parse-accept-language@npm:1.0.0"
+  checksum: c1dcc0f520cb85be391f1cf4b5f691ab19183e5d8e8f5277c0d2210a78a6d01ee907b9bb70f7425c4a8d5a9ed86f8b18a8d53f089025772d89f5cbe39282f266
+  languageName: node
+  linkType: hard
+
+"ip-regex@npm:^4.0.0":
+  version: 4.3.0
+  resolution: "ip-regex@npm:4.3.0"
+  checksum: 7ff904b891221b1847f3fdf3dbb3e6a8660dc39bc283f79eb7ed88f5338e1a3d1104b779bc83759159be266249c59c2160e779ee39446d79d4ed0890dfd06f08
+  languageName: node
+  linkType: hard
+
 "ip@npm:^1.1.5":
   version: 1.1.5
   resolution: "ip@npm:1.1.5"
@@ -4395,6 +4409,15 @@ __metadata:
   version: 1.0.0
   resolution: "is-interactive@npm:1.0.0"
   checksum: 824808776e2d468b2916cdd6c16acacebce060d844c35ca6d82267da692e92c3a16fdba624c50b54a63f38bdc4016055b6f443ce57d7147240de4f8cdabaf6f9
+  languageName: node
+  linkType: hard
+
+"is-ip@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "is-ip@npm:3.1.0"
+  dependencies:
+    ip-regex: ^4.0.0
+  checksum: da2c2b282407194adf2320bade0bad94be9c9d0bdab85ff45b1b62d8185f31c65dff3884519d57bf270277e5ea2046c7916a6e5a6db22fe4b7ddcdd3760f23eb
   languageName: node
   linkType: hard
 
@@ -6297,6 +6320,9 @@ __metadata:
     npm-run-all: ^4.1.5
     react: ^17.0.2
     react-dom: ^17.0.2
+    remix-auth: ^3.2.1
+    remix-auth-github: ^1.0.0
+    remix-auth-oauth2: ^1.2.0
     typescript: ^4.6.3
     wrangler: beta
   languageName: unknown
@@ -6713,6 +6739,61 @@ __metadata:
   languageName: node
   linkType: hard
 
+"remix-auth-github@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "remix-auth-github@npm:1.0.0"
+  dependencies:
+    remix-auth: ^3.0.0
+    remix-auth-oauth2: ^1.0.0
+  peerDependencies:
+    "@remix-run/server-runtime": ^1.0.0
+  checksum: 8d859026171cfe19fcf6560d2ffd9c53fecb760dbb85664c5ecbdebd2654fa41d89665bfe9e493facf7847e5c9b1f624afe6a7d800858a8417b68b76c21de59f
+  languageName: node
+  linkType: hard
+
+"remix-auth-oauth2@npm:^1.0.0, remix-auth-oauth2@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "remix-auth-oauth2@npm:1.2.0"
+  dependencies:
+    debug: ^4.3.3
+    remix-auth: ^3.1.0
+    uuid: ^8.3.2
+  peerDependencies:
+    "@remix-run/server-runtime": ^1.0.0
+  checksum: 2ff53df3bb045222b0156ddb84fbb987eed84da6b0788b55e77999c162af953f9ddc94692ac9a3ce0020f5ef4aaea4a9e8de1521776c9fdf89e8a882e2750b38
+  languageName: node
+  linkType: hard
+
+"remix-auth@npm:^3.0.0, remix-auth@npm:^3.1.0, remix-auth@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "remix-auth@npm:3.2.1"
+  dependencies:
+    remix-utils: ^2.2.0
+    uuid: ^8.3.2
+  peerDependencies:
+    "@remix-run/react": ^1.0.0
+    "@remix-run/server-runtime": ^1.0.0
+  checksum: ffa1cfe125d86066004e98dbf3ba844e34114c2d4eab660ff03cd1f178de20d50111e071f7ac570bf23420bc7056da69132917fe259a84406ea97338cc765be3
+  languageName: node
+  linkType: hard
+
+"remix-utils@npm:^2.2.0":
+  version: 2.11.1
+  resolution: "remix-utils@npm:2.11.1"
+  dependencies:
+    intl-parse-accept-language: ^1.0.0
+    is-ip: ^3.1.0
+    schema-dts: ^1.1.0
+    type-fest: ^2.5.2
+    uuid: ^8.3.2
+  peerDependencies:
+    "@remix-run/react": ^1.1.1
+    "@remix-run/server-runtime": ^1.1.1
+    react: ^17.0.2
+  checksum: 9aef9fa672827dd206eab8c6445728a1383a850151c4da8eaf815103f40d5be71383b5d1a5a1b6537e44c5ca97fc3a5e825b44bbda2d74d31d196979bf534c11
+  languageName: node
+  linkType: hard
+
 "requireindex@npm:^1.2.0":
   version: 1.2.0
   resolution: "requireindex@npm:1.2.0"
@@ -6915,6 +6996,15 @@ __metadata:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
   checksum: c4b35cf967c8f0d3e65753252d0f260271f81a81e427241295c5a7b783abf4ea9e905f22f815ab66676f5313be0a25f47be582254db8f9241b259213e999b8fc
+  languageName: node
+  linkType: hard
+
+"schema-dts@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "schema-dts@npm:1.1.0"
+  peerDependencies:
+    typescript: ">=4.1.0"
+  checksum: 546af6d8707790d666f64665b755a683166675c11195406e78e2ac875e7b6f1f550b4306449c8b00a5ef0384a487a7837eac7b8b3f00c2ca2c8f231d931507d4
   languageName: node
   linkType: hard
 
@@ -7635,6 +7725,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"type-fest@npm:^2.5.2":
+  version: 2.12.2
+  resolution: "type-fest@npm:2.12.2"
+  checksum: ee69676da1f69d2b14bbec28c7b95220a3221ab14093f54bde179c59e185a80470859553eada535ec35d8637a245c2f0efe9d7c99cc46a43f3b4c7ef64db7957
+  languageName: node
+  linkType: hard
+
 "type-is@npm:~1.6.18":
   version: 1.6.18
   resolution: "type-is@npm:1.6.18"
@@ -7853,6 +7950,15 @@ __metadata:
   version: 1.0.1
   resolution: "utils-merge@npm:1.0.1"
   checksum: c81095493225ecfc28add49c106ca4f09cdf56bc66731aa8dabc2edbbccb1e1bfe2de6a115e5c6a380d3ea166d1636410b62ef216bb07b3feb1cfde1d95d5080
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^8.3.2":
+  version: 8.3.2
+  resolution: "uuid@npm:8.3.2"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
   languageName: node
   linkType: hard
 
