@@ -14,6 +14,12 @@ binding = "DATA"
 id = "d1bb330b904f42818986d9375e103c01"
 preview_id = "d1bb330b904f42818986d9375e103c01"
 
+[[kv_namespaces]]
+binding = "APPS"
+id = "0441321106a340d1977c90571d660957"
+preview_id = "0441321106a340d1977c90571d660957"
+
+
 [site]
 bucket = "./public"
 entry-point = "."

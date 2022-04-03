@@ -30,7 +30,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:7.17.8, @babel/core@npm:^7.17.5":
+"@babel/core@npm:7.17.8, @babel/core@npm:^7.12.10, @babel/core@npm:^7.17.5":
   version: 7.17.8
   resolution: "@babel/core@npm:7.17.8"
   dependencies:
@@ -1372,6 +1372,63 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@xstate/cli@npm:^0.1.5":
+  version: 0.1.5
+  resolution: "@xstate/cli@npm:0.1.5"
+  dependencies:
+    "@babel/core": ^7.12.10
+    "@xstate/machine-extractor": 0.6.2
+    "@xstate/tools-shared": 1.1.3
+    chokidar: ^3.5.3
+    commander: ^8.0.0
+    xstate: ^4.29.0
+  bin:
+    xstate: bin/bin.js
+  checksum: cd6bb187889a2e5e15892ea0787cc64dccf2fff44190ec40802339b5cce6333b4ba11cb52fab969ad6b5ac8a67b5a21cb1f77c59db7f9b2590f53051c0b4d782
+  languageName: node
+  linkType: hard
+
+"@xstate/machine-extractor@npm:0.6.2":
+  version: 0.6.2
+  resolution: "@xstate/machine-extractor@npm:0.6.2"
+  peerDependencies:
+    "@babel/core": ^7
+    xstate: ^4
+  checksum: 46b73fc6894bbce500dafcf51bfd14780c1f2fd9a18a8d544d3a844a7b3012860cbb7f9ec303c8ebc4868983b67f605dd3d3f0962433c9d24a71eeabb339c24f
+  languageName: node
+  linkType: hard
+
+"@xstate/react@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@xstate/react@npm:2.0.1"
+  dependencies:
+    use-isomorphic-layout-effect: ^1.0.0
+    use-subscription: ^1.3.0
+  peerDependencies:
+    "@xstate/fsm": ^1.6.5
+    react: ^16.8.0 || ^17.0.0
+    xstate: ^4.30.3
+  peerDependenciesMeta:
+    "@xstate/fsm":
+      optional: true
+    xstate:
+      optional: true
+  checksum: 5409c2059534b73fdaafaa34f28c23916498caf68e8ae7be01e6f18e6112c8c580297770ecfb40a8fc32fd94d2fbf3c5abff4c239e9cea96f4ed25047e96510c
+  languageName: node
+  linkType: hard
+
+"@xstate/tools-shared@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@xstate/tools-shared@npm:1.1.3"
+  dependencies:
+    "@xstate/machine-extractor": 0.6.2
+  peerDependencies:
+    prettier: ^2.3.1
+    xstate: ^4
+  checksum: ecbe1bcf63b7143fa0ace93309e4780e526423c31f59a8fef15734c9af5e769e8def175000b733f1356d9abaf5074fe311022a243222d3893dc2fc500ef9854b
+  languageName: node
+  linkType: hard
+
 "@zip.js/zip.js@npm:^2.4.9":
   version: 2.4.9
   resolution: "@zip.js/zip.js@npm:2.4.9"
@@ -2009,7 +2066,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.5.1":
+"chokidar@npm:^3.5.1, chokidar@npm:^3.5.3":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
   dependencies:
@@ -2142,6 +2199,13 @@ __metadata:
   version: 2.0.2
   resolution: "comma-separated-tokens@npm:2.0.2"
   checksum: 8fa68ff2605233571536a802a7c712b0c766e0c5088e067be72740054e84d040865eea945c984924ae84932bcc3e25a99f71601220b438e875b5f42b87277767
+  languageName: node
+  linkType: hard
+
+"commander@npm:^8.0.0":
+  version: 8.3.0
+  resolution: "commander@npm:8.3.0"
+  checksum: 0f82321821fc27b83bd409510bb9deeebcfa799ff0bf5d102128b500b7af22872c0c92cb6a0ebc5a4cf19c6b550fba9cedfa7329d18c6442a625f851377bacf0
   languageName: node
   linkType: hard
 
@@ -6385,6 +6449,8 @@ __metadata:
     "@remix-run/react": ^1.3.4
     "@types/react": ^17.0.43
     "@types/react-dom": ^17.0.14
+    "@xstate/cli": ^0.1.5
+    "@xstate/react": ^2.0.1
     "@zip.js/zip.js": ^2.4.9
     esbuild: ^0.14.30
     eslint: ^8.11.0
@@ -6397,6 +6463,7 @@ __metadata:
     remix-auth-oauth2: ^1.2.0
     runtypes: ^6.5.1
     typescript: ^4.6.3
+    xstate: ^4.30.6
   languageName: unknown
   linkType: soft
 
@@ -8018,6 +8085,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"use-isomorphic-layout-effect@npm:^1.0.0":
+  version: 1.1.2
+  resolution: "use-isomorphic-layout-effect@npm:1.1.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: a6532f7fc9ae222c3725ff0308aaf1f1ddbd3c00d685ef9eee6714fd0684de5cb9741b432fbf51e61a784e2955424864f7ea9f99734a02f237b17ad3e18ea5cb
+  languageName: node
+  linkType: hard
+
+"use-subscription@npm:^1.3.0":
+  version: 1.6.0
+  resolution: "use-subscription@npm:1.6.0"
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 0ce15a3ed1f66f78cb2d7a83ff4980e2ac93054b0bcbdc4e492e77fed599233372aaaf9c9fd9b370484c491c5aee0b980859db1108ad63ee4cdba0f468c4f5d1
+  languageName: node
+  linkType: hard
+
 "util-deprecate@npm:^1.0.1, util-deprecate@npm:~1.0.1":
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
@@ -8245,6 +8333,13 @@ __metadata:
     deasync:
       optional: true
   checksum: 5a3f2434a5390aaebc66aa7d1a90d582de29c2256c94e542df7476cd5ffac6c160ebcb4f75a1a0593dfd8c6d0e650e1ad18f023a57262e0b3abc89c3e1f5c86e
+  languageName: node
+  linkType: hard
+
+"xstate@npm:^4.29.0, xstate@npm:^4.30.6":
+  version: 4.30.6
+  resolution: "xstate@npm:4.30.6"
+  checksum: ee34698cbdda15895da8ab845901d931a1515fba916710e88fddd9223f4564927a11a2b8b0d82d801f77df2c25ef2f5c299e41819ddddf5c70ddeafe185bd264
   languageName: node
   linkType: hard
 
