@@ -3,7 +3,7 @@ import type {
   AuthProvider,
   Manifest,
   User,
-} from '../models';
+} from '~/models';
 
 const StorageKey = {
   id(params: { username: string }) {

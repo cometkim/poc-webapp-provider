@@ -43,7 +43,7 @@ export default function Index() {
           <ul>
             {login.apps.map(app => (
               <li key={app.manifest.name}>
-                <a href={`https://${app.appId}.webapp.hyeseong.kim`}>
+                <a href={`https://${WEBAPP_HOST_PATTERN.replace('*', `${app.manifest.name}.${login.user.name}`)}`}>
                   {app.manifest.name}
                 </a> (version: {app.manifest.version})
               </li>

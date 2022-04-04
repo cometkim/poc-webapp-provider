@@ -7,6 +7,8 @@ declare global {
   const SESSION: KVNamespace;
   const DATA: KVNamespace;
   const APPS: KVNamespace;
+
+  const WEBAPP_HOST_PATTERN: string;
 }
 
 addEventListener('fetch', async event => {

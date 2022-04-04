@@ -3,19 +3,17 @@ import * as zip from '@zip.js/zip.js';
 
 import { publicLatestAppInfo } from '../app/services/user.server';
 
-declare const WEBAPP_HOST_PATTERN: string;
-
-const WEBAPP_HOST_REGEX_PATTERN = WEBAPP_HOST_PATTERN
-  .replace('*.', `(?<appName>[\\w\\-]+).(?<username>[\\w\\-]+).`)
-  .replaceAll('.', '\\.');
-
-const WEBAPP_HOST_REGEX = new RegExp(WEBAPP_HOST_REGEX_PATTERN);
-
 export async function handleWebapp(event: FetchEvent): Promise<Response> {
+  const WEBAPP_HOST_REGEX_PATTERN = WEBAPP_HOST_PATTERN
+    .replace('*', `(?<appName>[\\w-]+).(?<username>[\\w-]+)`)
+    .replaceAll('.', '\\.');
+
+  const WEBAPP_HOST_REGEX = new RegExp(WEBAPP_HOST_REGEX_PATTERN);
+
   const url = new URL(event.request.url);
   const match = url.host.match(WEBAPP_HOST_REGEX);
 
-  if (match.groups) {
+  if (match?.groups) {
     const { appName, username } = match.groups;
     const appInfo = await publicLatestAppInfo({ appName, username });
     const buffer = await APPS.get(appInfo.appId, 'arrayBuffer');
