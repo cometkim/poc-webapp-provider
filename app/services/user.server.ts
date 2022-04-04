@@ -5,8 +5,26 @@ import type {
   User,
 } from '../models';
 
-const makePrefix = (email: string) => `User:${email}`;
-const makeStorageKey = (user: User.T, ...key: string[]) => `${makePrefix(user.email)}:${key.join(':')}`;
+const StorageKey = {
+  id(params: { username: string }) {
+    return `User:id:${params.username}`;
+  },
+  appListPrefix(params: { user: User.T }) {
+    return `User:AppInfo:${params.user.username}:`;
+  },
+  appVersionListPrefix(params: { user: User.T, manifest: Manifest.T }) {
+    return `${this.appListPrefix(params)}${params.manifest.name}:`;
+  },
+  appVersion(params: { user: User.T, manifest: Manifest.T }) {
+    return `${this.appVersionListPrefix(params)}${params.manifest.version}`;
+  },
+};
+
+const PublicStorageKey = {
+  appVersionListPrefix(params: { username: string, appName: string }) {
+    return `User:AppInfo:${params.username}:${params.appName}:`;
+  },
+};
 
 interface SignIn {
   (params: {
@@ -19,8 +37,8 @@ interface SignIn {
 }
 
 export const signIn: SignIn = async params => {
-  const userKey = makePrefix(params.email);
-  let user = await DATA.get<User.T>(userKey, 'json');
+  const key = StorageKey.id(params);
+  let user = await DATA.get<User.T>(key, 'json');
   if (!user) {
     user = {
       id: crypto.randomUUID(),
@@ -29,9 +47,8 @@ export const signIn: SignIn = async params => {
       email: params.email,
       pictureUrl: params.pictureUrl,
     };
-    await DATA.put(userKey, JSON.stringify(user));
+    await DATA.put(key, JSON.stringify(user));
   }
-
   return user;
 }
 
@@ -42,7 +59,7 @@ interface GetAllApps {
 }
 
 export const getAllApps: GetAllApps = async params => {
-  const prefix = makeStorageKey(params.user, 'App');
+  const prefix = StorageKey.appListPrefix(params);
   const list = await DATA.list({ prefix });
   const allApps = new Map<string, AppInfo.T>();
   for (const key of list.keys) {
@@ -58,29 +75,6 @@ export const getAllApps: GetAllApps = async params => {
   return [...allApps.values()];
 };
 
-interface GetManifest {
-  (params: {
-    user: User.T,
-    appName: string,
-  }): Promise<Manifest.T | null>;
-}
-
-export const getManifest: GetManifest = async params => {
-  const prefix = makeStorageKey(params.user, 'App', params.appName);
-  const list = await DATA.list({ prefix });
-  const latestKey = list.keys.at(-1);
-  if (!latestKey) {
-    return null;
-  }
-
-  const appInfo = await DATA.get<AppInfo.T>(latestKey.name, 'json');
-  if (!appInfo) {
-    return null;
-  }
-
-  return appInfo.manifest;
-};
-
 interface UploadApp {
   (params: {
     user: User.T,
@@ -91,12 +85,7 @@ interface UploadApp {
 }
 
 export const uploadApp: UploadApp = async params => {
-  const storageKey = makeStorageKey(
-    params.user,
-    'App',
-    params.manifest.name,
-    params.manifest.version.toString(),
-  );
+  const key = StorageKey.appVersion(params);
   const appId = crypto.randomUUID();
   const appInfo: AppInfo.T = {
     appId,
@@ -104,7 +93,7 @@ export const uploadApp: UploadApp = async params => {
     manifest: params.manifest,
   };
   await Promise.all([
-    DATA.put(storageKey, JSON.stringify(appInfo)),
+    DATA.put(key, JSON.stringify(appInfo)),
     APPS.put(appId, params.bundle),
   ]);
   return appInfo;
@@ -118,12 +107,25 @@ interface GetAppInfo {
 }
 
 export const getAppInfo: GetAppInfo = async params => {
-  const storageKey = makeStorageKey(
-    params.user,
-    'App',
-    params.manifest.name,
-    params.manifest.version.toString(),
-  );
-  const appInfo = await DATA.get<AppInfo.T>(storageKey, 'json');
+  const key = StorageKey.appVersion(params);
+  const appInfo = await DATA.get<AppInfo.T>(key, 'json');
+  return appInfo;
+};
+
+interface PublicLatestAppInfo {
+  (params: {
+    username: string,
+    appName: string,
+  }): Promise<AppInfo.T | null>;
+}
+
+export const publicLatestAppInfo: PublicLatestAppInfo = async params => {
+  const prefix = PublicStorageKey.appVersionListPrefix(params);
+  const list = await DATA.list({ prefix });
+  const latestKey = list.keys.map(key => key.name).at(-1);
+  if (!latestKey) {
+    return null;
+  }
+  const appInfo = await DATA.get<AppInfo.T>(latestKey, 'json');
   return appInfo;
 };

@@ -6,6 +6,7 @@ account_id = "fe86c3d78b514b31fdd1a74181c2c4ce"
 
 [vars]
 FALLBACK_ORIGIN="https://webapp-provider.hyeseong.kim"
+WEBAPP_HOST_PATTERN="*.webapp.hyeseong.kim"
 GITHUB_APP_CALLBACK_URL="https://webapp-provider.hyeseong.kim/auth/github/callback"
 
 # [secrets]

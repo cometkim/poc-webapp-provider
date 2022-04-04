@@ -6,7 +6,7 @@ import * as zip from '@zip.js/zip.js';
 
 import { User, Manifest } from '~/models';
 import { authenticator } from '~/services/auth.server';
-import { getManifest, uploadApp } from '~/services/user.server';
+import { publicLatestAppInfo, uploadApp } from '~/services/user.server';
 
 type LoaderData = {
   user: User.T,
@@ -56,8 +56,8 @@ export const action: ActionFunction = async ({ request }) => {
 
     const { manifest } = result;
 
-    const currentManifest = await getManifest({ user, appName: manifest.name });
-    if (!currentManifest || currentManifest.version < manifest.version) {
+    const latestAppInfo = await publicLatestAppInfo({ username: user.username, appName: manifest.name });
+    if (!latestAppInfo || latestAppInfo.manifest.version < manifest.version) {
       await uploadApp({
         user,
         manifest: result.manifest,
@@ -65,10 +65,10 @@ export const action: ActionFunction = async ({ request }) => {
         bundle: result.binary,
       });
       return redirect('/');
-    } else if (currentManifest.version >= manifest.version) {
+    } else if (latestAppInfo.manifest.version >= manifest.version) {
       return json<ActionData>({
         result: 'error',
-        error: `version should be greater than ${currentManifest.version}`,
+        error: `version should be greater than ${latestAppInfo.manifest.version}`,
       }, 400);
     }
   } catch (e: any) {

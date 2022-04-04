@@ -1,20 +1,29 @@
 import { lookup } from 'mrmime';
 import * as zip from '@zip.js/zip.js';
 
+import { publicLatestAppInfo } from '../app/services/user.server';
+
+declare const WEBAPP_HOST_PATTERN: string;
+
+const WEBAPP_HOST_REGEX_PATTERN = WEBAPP_HOST_PATTERN
+  .replace('*.', `(?<appName>[\\w\\-]+).(?<username>[\\w\\-]+).`)
+  .replaceAll('.', '\\.');
+
+const WEBAPP_HOST_REGEX = new RegExp(WEBAPP_HOST_REGEX_PATTERN);
+
 export async function handleWebapp(event: FetchEvent): Promise<Response> {
   const url = new URL(event.request.url);
-  const match = url.host.match(/(?<appId>[\w\-]+)\.webapp\.hyeseong\.kim/);
+  const match = url.host.match(WEBAPP_HOST_REGEX);
 
   if (match.groups) {
-    const { appId } = match.groups;
-    const buffer = await APPS.get(appId, 'arrayBuffer');
-    const baseDir = await APPS.get(`${appId}:baseDir`, 'text') || '/';
+    const { appName, username } = match.groups;
+    const appInfo = await publicLatestAppInfo({ appName, username });
+    const buffer = await APPS.get(appInfo.appId, 'arrayBuffer');
     if (!buffer) {
-      return new Response(`Unknown app id: ${appId}`, {
+      return new Response(`Unknown appId: ${appInfo.appId}`, {
         status: 404,
       });
     }
-
     const binary = new Uint8Array(buffer);
 
     zip.configure({ useWebWorkers: false });
@@ -27,9 +36,9 @@ export async function handleWebapp(event: FetchEvent): Promise<Response> {
       if (pathname.endsWith('/')) {
         pathname += 'index.html';
       }
-      const target = entries.find(entry => entry.filename.replace(baseDir, '/') === pathname);
+      const target = entries.find(entry => entry.filename.replace(appInfo.baseDir, '/') === pathname);
       if (!target) {
-        return new Response(`Not found path: ${pathname}, baseDir: ${baseDir}`, { status: 404 });
+        return new Response(`Not found path: ${pathname}, baseDir: ${appInfo.baseDir}`, { status: 404 });
       }
       const binary = await target.getData(
         new zip.Uint8ArrayWriter(),
@@ -42,10 +51,11 @@ export async function handleWebapp(event: FetchEvent): Promise<Response> {
           'Content-Type': lookup(target.filename) || 'application/octet-stream',
         },
       });
+    } catch (e: any) {
+      return new Response(`Internal error: ${e.message}`, { status: 500 });
     } finally {
       await zipReader.close();
     }
-    return new Response('Internal error', { status: 500 });
   } else {
     return new Response('Not found', { status: 404 });
   }

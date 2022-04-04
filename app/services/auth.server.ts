@@ -1,7 +1,7 @@
 import { Authenticator } from 'remix-auth';
 import { GitHubStrategy } from 'remix-auth-github';
 
-import type { User } from '../models';
+import type { User } from '~/models';
 
 import * as session from './session.server';
 import { signIn } from './user.server';
