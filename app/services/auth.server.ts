@@ -1,19 +1,19 @@
 import { Authenticator } from 'remix-auth';
 import { GitHubStrategy } from 'remix-auth-github';
 
-import type { User } from '../models/user';
+import type { User } from '../models';
 
 import * as session from './session.server';
 import { signIn } from './user.server';
 
-export const authenticator = new Authenticator(session);
+export const authenticator = new Authenticator<User.T>(session);
 
-declare var GITHUB_APP_CLIENT_ID: string;
-declare var GITHUB_APP_CLIENT_SECRET: string;
-declare var GITHUB_APP_CALLBACK_URL: string;
+declare const GITHUB_APP_CLIENT_ID: string;
+declare const GITHUB_APP_CLIENT_SECRET: string;
+declare const GITHUB_APP_CALLBACK_URL: string;
 
 authenticator.use(
-  new GitHubStrategy<User>({
+  new GitHubStrategy({
     clientID: GITHUB_APP_CLIENT_ID,
     clientSecret: GITHUB_APP_CLIENT_SECRET,
     callbackURL: GITHUB_APP_CALLBACK_URL,

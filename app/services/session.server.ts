@@ -1,7 +1,6 @@
 import { createCloudflareKVSessionStorage } from '@remix-run/cloudflare';
 
-declare var SESSION: KVNamespace;
-declare var SESSION_SECRET: string;
+declare const SESSION_SECRET: string;
 
 export const {
   getSession,
