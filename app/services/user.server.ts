@@ -5,6 +5,8 @@ import type {
   User,
 } from '~/models';
 
+import { getExistCustomHost, createCustomHost } from './zone.server';
+
 const StorageKey = {
   id(params: { username: string }) {
     return `User:id:${params.username}`;
@@ -81,14 +83,22 @@ interface UploadApp {
     baseDir: string,
     manifest: Manifest.T,
     bundle: Uint8Array,
-  }): Promise<AppInfo.T>;
+  }): Promise<AppInfo.T | null>;
 }
 
 export const uploadApp: UploadApp = async params => {
   const key = StorageKey.appVersion(params);
   const appId = crypto.randomUUID();
+  let customHost = await getExistCustomHost({ user: params.user, appName: params.manifest.name });
+  if (!customHost) {
+    customHost = await createCustomHost({ user: params.user, appName: params.manifest.name });
+  }
+  if (!customHost) {
+    return null;
+  }
   const appInfo: AppInfo.T = {
     appId,
+    customHost,
     baseDir: params.baseDir,
     manifest: params.manifest,
   };
