@@ -10,6 +10,7 @@ type LoaderData = {
     user: User.T,
     apps: AppInfo.T[],
   } | null;
+  hostPattern: string,
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -17,6 +18,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   if (!user) {
     return {
       login: null,
+      hostPattern: WEBAPP_HOST_PATTERN,
     };
   }
   const apps = await getAllApps({ user });
@@ -25,11 +27,12 @@ export const loader: LoaderFunction = async ({ request }) => {
       user,
       apps,
     },
+    hostPattern: WEBAPP_HOST_PATTERN,
   };
 };
 
 export default function Index() {
-  const { login } = useLoaderData<LoaderData>();
+  const { login, hostPattern } = useLoaderData<LoaderData>();
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
@@ -41,11 +44,12 @@ export default function Index() {
           </p>
           <h2>My Webapps</h2>
           <ul>
-            {login.apps.map(app => (
-              <li key={app.manifest.name}>
-                <a href={`https://${WEBAPP_HOST_PATTERN.replace('*', `${app.manifest.name}.${login.user.name}`)}`}>
+            {login.apps.map((app, i) => (
+              <li key={app.appId}>
+                <a href={'https://' + hostPattern.replace('*', `${app.manifest.name}.${login.user.username}`)}>
                   {app.manifest.name}
-                </a> (version: {app.manifest.version})
+                </a>
+                (version: {app.manifest.version})
               </li>
             ))}
           </ul>
