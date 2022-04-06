@@ -11,7 +11,7 @@ export const {
     name: 'SESSION_ID',
     httpOnly: true,
     secure: true,
-    sameSite: 'strict',
+    sameSite: 'lax',
     secrets: [
       SESSION_SECRET,
     ],
